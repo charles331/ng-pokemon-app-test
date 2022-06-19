@@ -1,4 +1,4 @@
-<h1>List de Pokémons</h1>
+<h1 class="center">List de Pokémons</h1>
 
 <input
     #input
@@ -14,9 +14,26 @@
     Aucun pokemon n'a été trouvé.
 </p>
 
-<p *ngFor="let pokemon of pokemonsList">
-    {{ pokemon.name }}
-</p>
+<!--https://materializecss.com/getting-started.html-->
+<div class="container">
+    <div class="row">
+        <div *ngFor="let pokemon of pokemonsList" class="col m4 s6">
+            <div class="card horizontal">
+                <div class="card-image">
+                    <img [src]="pokemon.picture">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>{{pokemon.name}}</p>
+                        <p><small>{{pokemon.created}}</small></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <!--(click)="selectPokemon($event)"-->
 <!--p (click)="selectPokemon(pokemonsList[1])">{{ pokemonsList[1].name }}</p>
