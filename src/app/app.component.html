@@ -2,14 +2,24 @@
 
 <input
     #input
-    (keyup)="selectPokemon(input.value)"
+    (keyup.enter)="selectPokemon(input.value)"
     type="number"
 />
-<p>pokemonSelected?.name = {{pokemonSelected?.name}}</p>
+
+<!-- * est une directive structurelle -->
+<p *ngIf="pokemonSelected">
+    Vous avez selectionné le pokemon: {{pokemonSelected?.name}}
+</p>
+<p *ngIf="!pokemonSelected">
+    Aucun pokemon n'a été trouvé.
+</p>
+
 <!--(click)="selectPokemon($event)"-->
-<!--p (click)="selectPokemon(pokemonsList[1])">{{ pokemonsList[1].name }}</p-->
+<!--p (click)="selectPokemon(pokemonsList[1])">{{ pokemonsList[1].name }}</p>
 <p>{{ pokemonsList[2].name }}</p>
 <p>{{ pokemonsList[3].name }}</p>
-<p>{{ pokemonsList[4].name }}</p>
+<p>{{ pokemonsList[4].name }}</p-->
+
+
 
 
