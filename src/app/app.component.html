@@ -14,6 +14,10 @@
     Aucun pokemon n'a été trouvé.
 </p>
 
+<p *ngFor="let pokemon of pokemonsList">
+    {{ pokemon.name }}
+</p>
+
 <!--(click)="selectPokemon($event)"-->
 <!--p (click)="selectPokemon(pokemonsList[1])">{{ pokemonsList[1].name }}</p>
 <p>{{ pokemonsList[2].name }}</p>
