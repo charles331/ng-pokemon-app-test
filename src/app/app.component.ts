@@ -7,26 +7,40 @@ import { Pokemon } from './pokemon';
 
 @Component({
   selector: 'app-root',
-  template:`<h1>Liste de Pokémons:</h1>
-  <br>`
+  templateUrl:'./app.component.html'
 })
 
 export class AppComponent implements OnInit{
   //pokemonsList = ['Bulbizarre','Salamèche','Carapuce'];
   pokemonsList:Pokemon[] = POKEMONS;
+  pokemonSelected:Pokemon|undefined;
 
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
     console.table(this.pokemonsList)
-    this.selectPokemon(this.pokemonsList[10]);
+    //this.selectPokemon(this.pokemonsList[10]);
 
   }
 
-selectPokemon(pokemon:Pokemon){
+  //selectPokemon(event:MouseEvent){
+  selectPokemon(pokemonId:string){
+  //const index: number=+(event?.target as HTMLInputElement).value
+  //const index=+pokemonId;
+  const pokemon: Pokemon|undefined = this.pokemonsList.find(pokemon => pokemon.id == +pokemonId);
+
   // JS ES6 angular backtick string variable
-  console.log(`Vous avez cliqué sur le pokémon ${pokemon.name}`); 
+  //console.log(`Vous avez cliqué sur le pokémon ${this.pokemonsList[index].name}`); 
+  if(pokemon){
+    console.log(`Vous avez demandé le pokémon ${pokemon.name}`); 
+    //this.pokemonSelected=this.pokemonsList[index];
+    this.pokemonSelected=pokemon;
+  } else {
+    console.log(`Vous avez demandé un pokémon qui n'existe pas`); 
+    this.pokemonSelected=undefined;
+  }
+
   // JS ES5 old version
-  console.log('Vous avez cliqué sur le pokémon ' + pokemon.name);
+  // console.log('Vous avez cliqué sur le pokémon ' + pokemon.name);
 }
 
 }
