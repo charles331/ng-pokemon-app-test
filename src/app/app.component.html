@@ -1,37 +1,44 @@
 <h1 class="center">List de Pokémons</h1>
 
-<input
+<!--input
     #input
     (keyup.enter)="selectPokemon(input.value)"
     type="number"
-/>
+/-->
 
-<!-- * est une directive structurelle -->
+<!-- * est une directive structurelle >
 <p *ngIf="pokemonSelected">
     Vous avez selectionné le pokemon: {{pokemonSelected?.name}}
 </p>
 <p *ngIf="!pokemonSelected">
     Aucun pokemon n'a été trouvé.
-</p>
+</p-->
 
 <!--https://materializecss.com/getting-started.html-->
 <div class="container">
     <div class="row">
         <div *ngFor="let pokemon of pokemonsList" class="col m4 s6">
-            <div class="card horizontal">
+            <div class="card horizontal" (click)="selectPokemon(pokemon)" pkmnBorderCard={{pokemon.bordercolor}}>
                 <div class="card-image">
                     <img [src]="pokemon.picture">
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
                         <p>{{pokemon.name}}</p>
-                        <p><small>{{pokemon.created}}</small></p>
-
+                        <p><small>{{pokemon.created | date:'shortDate':'+0100' | uppercase}}</small></p>
+                        <span 
+                            *ngFor="let type of pokemon.types" 
+                            class="{{type | pokemonTypeColor}}"
+                        >
+                            {{type}}
+                        </span>
+                        
+                        
+                        
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -40,7 +47,6 @@
 <p>{{ pokemonsList[2].name }}</p>
 <p>{{ pokemonsList[3].name }}</p>
 <p>{{ pokemonsList[4].name }}</p-->
-
 
 
 

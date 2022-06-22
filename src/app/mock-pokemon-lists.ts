@@ -8,7 +8,8 @@ export const POKEMONS: Pokemon[] = [
         cp: 5,
         picture: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
         types: ["Plante", "Poison"],
-        created: new Date()
+        created: new Date(),
+        bordercolor: "red"
     },
     {
         id: 2,
@@ -17,7 +18,8 @@ export const POKEMONS: Pokemon[] = [
         cp: 6,
         picture: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png",
         types: ["Feu"],
-        created: new Date()
+        created: new Date(),
+        bordercolor: "green"
     },
     {
         id: 3,
@@ -26,7 +28,8 @@ export const POKEMONS: Pokemon[] = [
         cp: 4,
         picture: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png",
         types: ["Eau"],
-        created: new Date()
+        created: new Date(),
+        bordercolor: "blue"
     },
     {
         id: 4,
@@ -35,7 +38,8 @@ export const POKEMONS: Pokemon[] = [
         cp: 2,
         picture: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/013.png",
         types: ["Insecte", "Poison"],
-        created: new Date()
+        created: new Date(),
+        bordercolor: "yellow"
     },
     {
         id: 5,

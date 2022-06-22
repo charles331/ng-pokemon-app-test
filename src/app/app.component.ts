@@ -19,14 +19,14 @@ export class AppComponent implements OnInit{
     // throw new Error('Method not implemented.');
     console.table(this.pokemonsList)
     //this.selectPokemon(this.pokemonsList[10]);
-
   }
 
   //selectPokemon(event:MouseEvent){
-  selectPokemon(pokemonId:string){
+  //selectPokemon(pokemonId:string){
+    selectPokemon(pk:Pokemon){
   //const index: number=+(event?.target as HTMLInputElement).value
   //const index=+pokemonId;
-  const pokemon: Pokemon|undefined = this.pokemonsList.find(pokemon => pokemon.id == +pokemonId);
+  const pokemon: Pokemon|undefined = this.pokemonsList.find(pokemon => pokemon.id == +pk.id);
 
   // JS ES6 angular backtick string variable
   //console.log(`Vous avez cliqué sur le pokémon ${this.pokemonsList[index].name}`); 
