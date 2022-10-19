@@ -25,3 +25,23 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## information
+
+```bash
+ng generate component pokemon/pokemon-form --dry-run
+ng generate component pokemon/pokemon-form --inline-template=false --dry-run
+ng generate component pokemon/pokemon-form --inline-template=false
+```
+
+```bash
+ng generate component pokemon/edit-pokemon --dry-run
+ng generate component pokemon/edit-pokemon
+
+d:\angular2022\ng-pokemon-app>ng generate component pokemon/edit-pokemon2 --dry-run
+CREATE src/app/pokemon/edit-pokemon2/edit-pokemon2.component.ts (285 bytes)
+UPDATE src/app/pokemon/pokemon.module.ts (1311 bytes)
+
+NOTE: The "--dry-run" option means no changes were made.
+```
