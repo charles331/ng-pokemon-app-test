@@ -17,7 +17,9 @@ export class ListPokemonComponent implements OnInit{
   constructor(private router: Router, private pokemonService: PokemonService) { }
 
   ngOnInit(){
-    this.pokemonsList=this.pokemonService.getPokemonList();
+    this.pokemonService.getPokemonList()
+      .subscribe(pokemonsList => this.pokemonsList = pokemonsList);
+    //this.pokemonsList=this.pokemonService.getPokemonList();
   }
 
 
@@ -26,6 +28,7 @@ export class ListPokemonComponent implements OnInit{
     selectPokemon(pk:Pokemon){
       //const index: number=+(event?.target as HTMLInputElement).value
       //const index=+pokemonId;
+      //console.warn(this.pokemonsList);
       const pokemon: Pokemon|undefined = this.pokemonsList.find(pokemon => pokemon.id == +pk.id);
     
       // JS ES6 angular backtick string variable

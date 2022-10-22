@@ -21,7 +21,7 @@ export class PokemonService {
   // https://rxjs.dev/api/operators/tap
   
   getPokemonList(): Observable<Pokemon[]>{
-    return this.Http.get<Pokemon[]>('api/pokemon').pipe(
+    return this.Http.get<Pokemon[]>('api/pokemons').pipe(
       tap((pokemon) =>  this.log(pokemon)),
       catchError((error) => this.handleError(error,[]))
     )
@@ -43,7 +43,7 @@ export class PokemonService {
   private log(response: Pokemon[]|Pokemon|undefined) {
     console.table(response);
   }
-  
+
   // refactor error
   private handleError(error: Error, errorValue: any){
     console.error(error);
