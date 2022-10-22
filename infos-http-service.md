@@ -17,6 +17,8 @@ npm install angular-in-memory-web-api --save-dev
 verif: package.json
 "angular-in-memory-web-api": "^0.14.0",
 
+[in-memory-web-api.git](https://github.com/angular/in-memory-web-api.git)
+
 ## 1.3. new service à la racine
 
 - ng generate service in-memory-data --dry-run
