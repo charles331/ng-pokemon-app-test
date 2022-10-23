@@ -55,6 +55,17 @@ export class PokemonService {
     );
   }
 
+  deletePokemonById(pokemonId: number): Observable<null>{
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    };
+
+    return this.Http.delete(`api/pokemons/${pokemonId}`, httpOptions).pipe(
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error,null))
+    );
+  }
+
   // refactor log
   //private log(response: Pokemon[]|Pokemon|undefined) {
   private log(response: any) {
