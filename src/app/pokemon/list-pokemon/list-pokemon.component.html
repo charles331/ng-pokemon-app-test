@@ -17,6 +17,8 @@
 <!--https://materializecss.com/getting-started.html-->
 <div class="container">
     <div class="row">
+        <app-search-pokemon></app-search-pokemon>
+
         <div *ngFor="let pokemon of pokemonsList" class="col m4 s6">
             <!--<div class="card horizontal" (click)="selectPokemon(pokemon)" pkmnBorderCard={{pokemon.bordercolor}}>-->
             <div class="card horizontal" (click)="selectPokemon(pokemon)" pkmnBorderCard={{pokemon.bordercolor}}>

@@ -39,6 +39,21 @@ export class PokemonService {
   }
 
   /**
+   * Search terl pokemon
+   * @param term
+   * @returns 
+   */
+  searchPokemonList(term: string): Observable<Pokemon[]> {
+    if(term.length<=1){
+      return of([]);
+    }
+    return this.http.get<Pokemon>(`api/pokemons/?name=${term}`).pipe(
+      tap((pokemon) =>  this.log("searchPokemonList = " + pokemon)),
+      catchError((error) => this.handleError(error,[]))
+    )
+  }
+
+  /**
    * Update a pokemon
    * @param pokemon
    * @returns 
