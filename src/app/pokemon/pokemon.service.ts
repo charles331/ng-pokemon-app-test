@@ -10,7 +10,7 @@ export class PokemonService {
 
 
 
-  constructor(private Http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 /**getPokemonList():Pokemon[]{
   *  return POKEMONS;
@@ -21,7 +21,7 @@ export class PokemonService {
   // https://rxjs.dev/api/operators/tap
   
   getPokemonList(): Observable<Pokemon[]>{
-    return this.Http.get<Pokemon[]>('api/pokemons').pipe(
+    return this.http.get<Pokemon[]>('api/pokemons').pipe(
       tap((pokemon) =>  this.log(pokemon)),
       catchError((error) => this.handleError(error,[]))
     )
@@ -32,7 +32,7 @@ export class PokemonService {
   *}
   **/
   getPokemonById(pokemonId: number):Observable<Pokemon|undefined>{
-    return this.Http.get<Pokemon>(`api/pokemons/${pokemonId}`).pipe(
+    return this.http.get<Pokemon>(`api/pokemons/${pokemonId}`).pipe(
       tap((pokemon) =>  this.log(pokemon)),
       catchError((error) => this.handleError(error,undefined))
     )
@@ -49,14 +49,35 @@ export class PokemonService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json'})
     };
 
-    return this.Http.put('api/pokemons', pokemon, httpOptions).pipe(
+    return this.http.put('api/pokemons', pokemon, httpOptions).pipe(
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error,null))
+    );
+  }
+/**
+ * Delete a pokemon
+ * 
+ * @param pokemonId 
+ * @returns 
+ */
+  deletePokemonById(pokemonId: number): Observable<null>{
+    return this.http.delete(`api/pokemons/${pokemonId}`).pipe(
       tap((response) => this.log(response)),
       catchError((error) => this.handleError(error,null))
     );
   }
 
-  deletePokemonById(pokemonId: number): Observable<null>{
-    return this.Http.delete(`api/pokemons/${pokemonId}`).pipe(
+  /**
+   * Add a pokemon
+   * 
+   * @param pokemon
+   * @returns 
+   */
+  addPokemon(pokemon: Pokemon): Observable<Pokemon>{
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    };
+    return this.http.post<Pokemon>('api/pokemons', pokemon, httpOptions).pipe(
       tap((response) => this.log(response)),
       catchError((error) => this.handleError(error,null))
     );
