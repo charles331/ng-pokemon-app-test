@@ -17,7 +17,8 @@ export class ListPokemonComponent implements OnInit{
   constructor(private router: Router, private pokemonService: PokemonService) { }
 
   ngOnInit(){
-    this.pokemonService.getPokemonList()
+    console.warn('Call getPokemonListAFS');
+    this.pokemonService.getPokemonListAfs()
       .subscribe(pokemonsList => this.pokemonsList = pokemonsList);
     //this.pokemonsList=this.pokemonService.getPokemonList();
   }
@@ -28,8 +29,9 @@ export class ListPokemonComponent implements OnInit{
     selectPokemon(pk:Pokemon){
       //const index: number=+(event?.target as HTMLInputElement).value
       //const index=+pokemonId;
-      //console.warn(this.pokemonsList);
-      const pokemon: Pokemon|undefined = this.pokemonsList.find(pokemon => pokemon.id == +pk.id);
+      console.warn(this.pokemonsList);
+      console.warn(pk.customID);
+      const pokemon: Pokemon|undefined = this.pokemonsList.find(pokemon => pokemon.customID == pk.customID);
     
       // JS ES6 angular backtick string variable
       //console.log(`Vous avez cliqué sur le pokémon ${this.pokemonsList[index].name}`); 
@@ -44,7 +46,7 @@ export class ListPokemonComponent implements OnInit{
     
       // JS ES5 old version
       // console.log('Vous avez cliqué sur le pokémon ' + pokemon.name);
-      this.router.navigate(['/pokemon',pk.id]);
+      this.router.navigate(['/pokemon',pk.customID]);
     }
 
 

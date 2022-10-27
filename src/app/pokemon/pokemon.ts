@@ -1,12 +1,16 @@
+import { AngularFirestore} from '@angular/fire/compat/firestore';
+import { Timestamp } from 'firebase/firestore';
+
 export class Pokemon {
 
+  customID?: string;
   id: number;
   hp: number;
   cp: number;
   name: string;
   picture: string;
   types: Array<string>;
-  created: Date;
+  created: Timestamp;
   bordercolor?: string;
 
   constructor(
@@ -15,14 +19,14 @@ export class Pokemon {
     cp: number = 10,
     picture: string = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/xxx.png',
     types: string[] =  ['Normal'],
-    created: Date = new Date()
+    //created: Date = new Date()
   ) {
     this.name=name;
     this.hp=hp;
     this.cp=cp;
     this.picture=picture;
     this.types=types;
-    this.created=created;            
+    //this.created=created;            
   }
 
 }

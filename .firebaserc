@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "ng-pokemon-app-2c2dd"
+  },
+  "targets": {
+    "ng-pokemon-app-2c2dd": {
+      "hosting": {
+        "ng-pokemon-app": [
+          "ng-pokemon-app-2c2dd"
+        ]
+      }
+    }
   }
 }

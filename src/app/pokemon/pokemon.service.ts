@@ -4,13 +4,16 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 //import { POKEMONS } from './mock-pokemon-lists';
 import { Pokemon } from './pokemon';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 @Injectable()
 export class PokemonService {
 
+  private itemsCollection: AngularFirestoreCollection<Pokemon>;
+  private itemDoc: AngularFirestoreDocument<Pokemon>;
 
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private afs: AngularFirestore) { }
 
 /**getPokemonList():Pokemon[]{
   *  return POKEMONS;
@@ -27,6 +30,84 @@ export class PokemonService {
     )
   }
 
+  /**
+   * https://github.com/angular/angularfire/issues/2985
+   * https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
+   * https://github.com/angular/angularfire/blob/master/docs/firestore/collections.md
+   * 
+   * @returns 
+   */
+  getPokemonListAfs(): Observable<Pokemon[]>{
+    this.itemsCollection = this.afs.collection<Pokemon>('pokemons');
+    //console.warn(this.itemsCollection);
+    return this.itemsCollection.valueChanges({ idField: 'customID' });
+  }
+
+  getPokemonByIdAfs(pokemonId: number):Observable<Pokemon|undefined>{
+    console.warn('`pokemons/${pokemonId}` = ' + `pokemons/${pokemonId}`);
+    this.itemDoc = this.afs.doc<Pokemon>(`pokemons/${pokemonId}`);
+    return this.itemDoc.valueChanges({ idField: 'customID' });
+  }
+  getPokemonByIdAfss(pokemonId: string):Observable<Pokemon|undefined>{
+    console.warn('`pokemons/${pokemonId}` = ' + `pokemons/${pokemonId}`);
+    this.itemDoc = this.afs.doc<Pokemon>(`pokemons/${pokemonId}`);
+    return this.itemDoc.valueChanges({ idField: 'customID' });
+  }
+
+  addPokemonAfs(pokemon: Pokemon): Observable<Pokemon>{
+    console.warn('insert AFS pokemon');
+    console.warn(pokemon);
+
+    this.itemsCollection = this.afs.collection<Pokemon>('pokemons');
+    const afsId = this.afs.createId();
+    console.warn('afsId=' + afsId);
+    
+    pokemon.customID=afsId;
+    pokemon.id=2;
+    //pokemon.hp=2;
+    //pokemon.cp=2;
+    //pokemon.name='Charles';
+    //pokemon.bordercolor='';
+    //pokemon.picture='';
+    //pokemon.types=['Normal'];
+    //pokemon.created=new Date;
+
+    //this.itemsCollection.doc("1").set(pokemon);
+    //{ name: 'item', price: 10 }
+    //this.itemsCollection.add({ id: 2,hp: 2,cp: 2,name: 'item',picture: '',types: ['Normal'],created: new Date });
+    //this.itemsCollection.add(pokemon);
+    console.warn(pokemon);
+    this.itemsCollection.doc(afsId).set({ 
+      id: pokemon.id,
+      hp: pokemon.hp,
+      cp: pokemon.cp,
+      name: pokemon.name,
+      picture: pokemon.picture,
+      types: pokemon.types,
+      created: pokemon.created
+    });
+    
+    //this.afs.collection<Pokemon>('pokemons').doc(`${pokemon.id}`).set(pokemon);
+    return of(pokemon);
+  }
+
+  updatePokemonAfs(pokemon: Pokemon): Observable<Pokemon|undefined>{
+    console.warn('updatePokemonAfs');
+    this.itemDoc = this.afs.doc<Pokemon>(`pokemons/${pokemon.customID}`);
+    this.itemDoc.set({
+      id: pokemon.id,
+      hp: pokemon.hp,
+      cp: pokemon.cp,
+      name: pokemon.name,
+      picture: pokemon.picture,
+      types: pokemon.types,
+      created: pokemon.created
+    })
+    return this.itemDoc.valueChanges();
+  }
+
+
+
   /**getPokemonById(pokemonId: number):Pokemon|undefined{
   *  return POKEMONS.find(pokemon => pokemon.id == pokemonId);
   *}
@@ -37,6 +118,8 @@ export class PokemonService {
       catchError((error) => this.handleError(error,undefined))
     )
   }
+
+
 
   /**
    * Search terl pokemon
@@ -97,6 +180,8 @@ export class PokemonService {
       catchError((error) => this.handleError(error,null))
     );
   }
+
+
 
   // refactor log
   //private log(response: Pokemon[]|Pokemon|undefined) {

@@ -13,6 +13,7 @@ export class PokemonFormComponent implements OnInit {
   @Input() pokemon: Pokemon;
   types: string[]
   isAddForm: boolean;
+  isEditForm: boolean;
 
   constructor(
     private pokemonService: PokemonService,
@@ -21,6 +22,7 @@ export class PokemonFormComponent implements OnInit {
   ngOnInit() {
     this.types=this.pokemonService.getPokemonTypeList();
     this.isAddForm = this.router.url.includes('add');
+    this.isEditForm = this.router.url.includes('edit');
   }
 
   hasType(type: string):Boolean{
@@ -55,12 +57,16 @@ export class PokemonFormComponent implements OnInit {
     //this.router.navigate(['/pokemon',this.pokemon.id]);
     // update or post ??
     if (this.isAddForm){
-      this.pokemonService.addPokemon(this.pokemon)
-      .subscribe((pokemon) => {this.router.navigate(['/pokemon',pokemon.id])});
+      this.pokemonService.addPokemonAfs(this.pokemon)
+      .subscribe((pokemon) => {this.router.navigate(['/pokemon',pokemon.customID])});
     } else {
-      this.pokemonService.updatePokemon(this.pokemon)
-      .subscribe(() => {this.router.navigate(['/pokemon',this.pokemon.id])});
+      this.pokemonService.updatePokemonAfs(this.pokemon)
+      .subscribe(() => {this.router.navigate(['/pokemon',this.pokemon.customID])});
     }
+  }
+  
+  goToPokemonList(){
+    this.router.navigate(['/pokemons']);
   }
 
 }

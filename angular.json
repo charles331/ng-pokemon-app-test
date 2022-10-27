@@ -107,6 +107,16 @@
           "options": {
             "browserTarget": "ng-pokemon-app:build"
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "ng-pokemon-app:build:production",
+            "firebaseProject": "ng-pokemon-app-2c2dd",
+            "firebaseHostingSite": "ng-pokemon-app-2c2dd"
+          }
         }
       }
     }

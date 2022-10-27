@@ -36,7 +36,7 @@ export class EditPokemonComponent implements OnInit {
 
     if(pokemonId) {
       //this.pokemon = this.pokemonService.getPokemonById(+pokemonId);
-      this.pokemonService.getPokemonById(+pokemonId)
+      this.pokemonService.getPokemonByIdAfss(pokemonId)
       .subscribe(pokemon => this.pokemon = pokemon);
       
     } else {
