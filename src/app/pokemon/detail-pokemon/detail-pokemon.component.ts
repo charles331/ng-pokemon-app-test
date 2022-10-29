@@ -14,6 +14,7 @@ export class DetailPokemonComponent implements OnInit {
 
   //pokemonList: Pokemon[];
   pokemon: Pokemon|undefined;
+  deleting: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +26,7 @@ export class DetailPokemonComponent implements OnInit {
     const pokemonId: string|null = this.route.snapshot.paramMap.get('id');
     if(pokemonId){
       //this.pokemon= this.pokemonList.find(pokemon => pokemon.id == +pokemonId);     
-      console.warn('Call getPokemonByIdAfs'); 
+      //console.warn('Call getPokemonByIdAfs'); 
       this.pokemonService.getPokemonByIdAfss(pokemonId)
         .subscribe(pokemon => this.pokemon = pokemon);
       //this.pokemon = this.pokemonService.getPokemonById(+pokemonId);
@@ -33,8 +34,8 @@ export class DetailPokemonComponent implements OnInit {
     //else {
     //  this.pokemon= undefined;
     //}
-    console.log(`Pokemon found ${this.pokemon?.name}`);
-  
+    //console.log(`Pokemon found ${this.pokemon?.name}`);
+    this.deleting=false;
   }
 
   goToPokemonList(){
@@ -46,7 +47,8 @@ export class DetailPokemonComponent implements OnInit {
   }
 
   deletePokemon(pokemon: Pokemon){
-    this.pokemonService.deletePokemonById(pokemon.id)
+    this.deleting=true;
+    this.pokemonService.deletePokemonByIdAfs(pokemon.customID)
       .subscribe(() => this.goToPokemonList());
   }
 

@@ -22,7 +22,7 @@ export class BorderCardDirective {
 
   @HostListener('mouseenter')  mouseenter(){
     //this.setBorder('#009688');
-    console.log("mouseenter [" + this.borderColor + "]");
+    //console.log("mouseenter [" + this.borderColor + "]");
     this.setBorder(this.borderColor || this.defaultColor);
   }
 
@@ -38,7 +38,7 @@ export class BorderCardDirective {
   private setBorder(color: string){
     let border =`solid 4px ${color}`;
     this.el.nativeElement.style.border=border;
-    console.log("border="+border);
+    //console.log("border="+border);
   }
 
 }

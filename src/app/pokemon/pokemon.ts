@@ -3,7 +3,7 @@ import { Timestamp } from 'firebase/firestore';
 
 export class Pokemon {
 
-  customID?: string;
+  customID: string;
   id: number;
   hp: number;
   cp: number;

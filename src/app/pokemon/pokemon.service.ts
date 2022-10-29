@@ -1,7 +1,7 @@
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { catchError, from, Observable, of, tap } from 'rxjs';
 //import { POKEMONS } from './mock-pokemon-lists';
 import { Pokemon } from './pokemon';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
@@ -45,23 +45,23 @@ export class PokemonService {
   }
 
   getPokemonByIdAfs(pokemonId: number):Observable<Pokemon|undefined>{
-    console.warn('`pokemons/${pokemonId}` = ' + `pokemons/${pokemonId}`);
+    //console.warn('`pokemons/${pokemonId}` = ' + `pokemons/${pokemonId}`);
     this.itemDoc = this.afs.doc<Pokemon>(`pokemons/${pokemonId}`);
     return this.itemDoc.valueChanges({ idField: 'customID' });
   }
   getPokemonByIdAfss(pokemonId: string):Observable<Pokemon|undefined>{
-    console.warn('`pokemons/${pokemonId}` = ' + `pokemons/${pokemonId}`);
+    //console.warn('`pokemons/${pokemonId}` = ' + `pokemons/${pokemonId}`);
     this.itemDoc = this.afs.doc<Pokemon>(`pokemons/${pokemonId}`);
     return this.itemDoc.valueChanges({ idField: 'customID' });
   }
 
   addPokemonAfs(pokemon: Pokemon): Observable<Pokemon>{
-    console.warn('insert AFS pokemon');
-    console.warn(pokemon);
+    //console.warn('insert AFS pokemon');
+    //console.warn(pokemon);
 
     this.itemsCollection = this.afs.collection<Pokemon>('pokemons');
     const afsId = this.afs.createId();
-    console.warn('afsId=' + afsId);
+    //console.warn('afsId=' + afsId);
     
     pokemon.customID=afsId;
     pokemon.id=2;
@@ -77,8 +77,9 @@ export class PokemonService {
     //{ name: 'item', price: 10 }
     //this.itemsCollection.add({ id: 2,hp: 2,cp: 2,name: 'item',picture: '',types: ['Normal'],created: new Date });
     //this.itemsCollection.add(pokemon);
-    console.warn(pokemon);
+    //console.warn(pokemon);
     this.itemsCollection.doc(afsId).set({ 
+      customID: pokemon.customID,
       id: pokemon.id,
       hp: pokemon.hp,
       cp: pokemon.cp,
@@ -93,9 +94,10 @@ export class PokemonService {
   }
 
   updatePokemonAfs(pokemon: Pokemon): Observable<Pokemon|undefined>{
-    console.warn('updatePokemonAfs');
+    //console.warn('updatePokemonAfs');
     this.itemDoc = this.afs.doc<Pokemon>(`pokemons/${pokemon.customID}`);
     this.itemDoc.set({
+      customID: pokemon.customID,
       id: pokemon.id,
       hp: pokemon.hp,
       cp: pokemon.cp,
@@ -128,7 +130,28 @@ export class PokemonService {
     return this.itemsCollection.valueChanges({ idField: 'customID' });
   }
 
+  deletePokemonByIdAfs(pokemonId: string): Observable<void>{
+    //return this.http.delete(`api/pokemons/${pokemonId}`).pipe(
+     // tap((response) => this.log(response)),
+      //catchError((error) => this.handleError(error,null))
+    //);
 
+    //console.warn("deletePokemonByIdAfs pokemonId=" + pokemonId);
+    this.itemDoc = this.afs.doc<Pokemon>(`pokemons/${pokemonId}`);
+
+    //https://firebase.google.com/docs/firestore/manage-data/delete-data
+    //https://stackoverflow.com/questions/47422225/deleting-docs-in-a-collection-using-angular-in-firestore
+    //https://stackoverflow.com/questions/39319279/convert-promise-to-observable
+
+    const observable = from(this.itemDoc.delete()
+    .catch((error) => this.handleError(error,null))
+    .then((response) => this.log(response)));
+
+    //console.warn("deletePokemonByIdAfs end");
+
+    return observable;
+    //return this.itemDoc.valueChanges({ idField: 'customID' });
+  }
 
 
 
@@ -210,12 +233,12 @@ export class PokemonService {
   // refactor log
   //private log(response: Pokemon[]|Pokemon|undefined) {
   private log(response: any) {
-    console.table(response);
+    //console.table(response);
   }
 
   // refactor error
   private handleError(error: Error, errorValue: any){
-    console.error(error);
+    //console.error(error);
     return of(errorValue);
   }
   

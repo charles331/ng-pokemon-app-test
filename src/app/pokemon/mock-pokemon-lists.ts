@@ -3,6 +3,7 @@ import { Timestamp } from 'firebase/firestore';
   
 export const POKEMONS: Pokemon[] = [
     {
+        customID: "1",
         id: 1,
         name: "Bulbizarre",
         hp: 25,
@@ -13,6 +14,7 @@ export const POKEMONS: Pokemon[] = [
         bordercolor: "red"
     },
     {
+        customID: "2",
         id: 2,
         name: "Salamèche",
         hp: 28,
@@ -23,6 +25,7 @@ export const POKEMONS: Pokemon[] = [
         bordercolor: "green"
     },
     {
+        customID: "3",
         id: 3,
         name: "Carapuce",
         hp: 21,
@@ -33,6 +36,7 @@ export const POKEMONS: Pokemon[] = [
         bordercolor: "blue"
     },
     {
+        customID: "4",
         id: 4,
         name: "Aspicot",
         hp: 16,
@@ -43,6 +47,7 @@ export const POKEMONS: Pokemon[] = [
         bordercolor: "yellow"
     },
     {
+        customID: "5",
         id: 5,
         name: "Roucool",
         hp: 30,
@@ -52,6 +57,7 @@ export const POKEMONS: Pokemon[] = [
         created: Timestamp.now()
     },
     {
+        customID: "6",
         id: 6,
         name: "Rattata",
         hp: 18,
@@ -61,6 +67,7 @@ export const POKEMONS: Pokemon[] = [
         created: Timestamp.now()
     },
     {
+        customID: "7",
         id: 7,
         name: "Piafabec",
         hp: 14,
@@ -70,6 +77,7 @@ export const POKEMONS: Pokemon[] = [
         created: Timestamp.now()
     },
     {
+        customID: "8",
         id: 8,
         name: "Abo",
         hp: 16,
@@ -79,6 +87,7 @@ export const POKEMONS: Pokemon[] = [
         created: Timestamp.now()
     },
     {
+        customID: "9",
         id: 9,
         name: "Pikachu",
         hp: 21,
@@ -88,6 +97,7 @@ export const POKEMONS: Pokemon[] = [
         created: Timestamp.now()
     },
     {
+        customID: "10",
         id: 10,
         name: "Sabelette",
         hp: 19,
@@ -97,6 +107,7 @@ export const POKEMONS: Pokemon[] = [
         created: Timestamp.now()
     },
     {
+        customID: "11",
         id: 11,
         name: "Mélofée",
         hp: 25,
@@ -106,6 +117,7 @@ export const POKEMONS: Pokemon[] = [
         created: Timestamp.now()
     },
     {
+        customID: "12",
         id: 12,
         name: "Groupix",
         hp: 17,
