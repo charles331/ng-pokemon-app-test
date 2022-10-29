@@ -21,6 +21,49 @@
    - e:\angular2022\ng-pokemon-app\dist\ng-pokemon-app\
 2. Créer notre projet sur le site de Firebase
 3. Déployer notre application sur Firebase
+   1. ng-pokemon-app
+   2. Hosting
+   3. npm install -g firebase-tools
+      1. -g niveau global
+   4. firebase --version
+   5. firebase login
+   6. firebase init
+      1. >(*) Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys
+      2. ? What do you want to use as your public directory? dist/ng-pokemon-app
+      3. ? Configure as a single-page app (rewrite all urls to /index.html)? (y/N) yes
+      4. ? Set up automatic builds and deploys with GitHub? No
+      5. ? File dist/ng-pokemon-app/index.html already exists. Overwrite? (y/N) no
+   7. firebase deploy
+
+```bash
+e:\angular2022\ng-pokemon-app\dist\ng-pokemon-app>npm install -g firebase-tools
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+npm WARN deprecated har-validator@5.1.3: this library is no longer supported
+npm WARN deprecated debug@4.1.1: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
+npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+
+changed 657 packages, and audited 658 packages in 17s
+
+36 packages are looking for funding
+  run `npm fund` for details
+
+6 vulnerabilities (5 moderate, 1 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+```
+
+```bash
+e:\angular2022\ng-pokemon-app\dist\ng-pokemon-app>firebase login
+Already logged in as charlesmeunier87@gmail.com
+```
+
 
 ## refresh
 
