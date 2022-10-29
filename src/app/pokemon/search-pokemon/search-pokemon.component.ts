@@ -29,7 +29,7 @@ export class SearchPokemonComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       // concatMap / mergeMap / switchMap
-      switchMap((term) => this.pokemonService.searchPokemonList(term))
+      switchMap((term) => this.pokemonService.searchPokemonListAfs(term))
     )
   }
 
@@ -38,7 +38,7 @@ export class SearchPokemonComponent implements OnInit {
   }
 
   goToDetail(pokemon: Pokemon) {
-    const link= ['/pokemon', pokemon.id];
+    const link= ['/pokemon', pokemon.customID];
     this.router.navigate(link);
   }
 

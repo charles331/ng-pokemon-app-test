@@ -5,6 +5,7 @@ import { catchError, Observable, of, tap } from 'rxjs';
 //import { POKEMONS } from './mock-pokemon-lists';
 import { Pokemon } from './pokemon';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { CollectionReference, Firestore, Query, Timestamp } from '@angular/fire/firestore';
 
 @Injectable()
 export class PokemonService {
@@ -101,10 +102,33 @@ export class PokemonService {
       name: pokemon.name,
       picture: pokemon.picture,
       types: pokemon.types,
-      created: pokemon.created
+      created: Timestamp.now()
     })
     return this.itemDoc.valueChanges();
   }
+
+  //https://javascript.plainenglish.io/how-to-do-crud-with-query-operations-in-firebase-with-firestore-angular-ionic-web-9c9e3db4ce72
+
+  searchPokemonListAfs(term: string): Observable<Pokemon[]> {
+    if(term.length<=1){
+      return of([]);
+    }
+    // https://www.makeuseof.com/angular-firebase-complex-queries/
+    // https://stackoverflow.com/questions/46568142/google-firestore-query-on-substring-of-a-property-value-text-search
+    /**
+     * The character \uf8ff used in the query is a very high code point in the Unicode range (it is a Private Usage Area [PUA] code).
+     * Because it is after most regular characters in Unicode,
+     * the query matches all values that start with queryText.
+     */
+    this.itemsCollection = this.afs.collection<Pokemon>('pokemons', ref => 
+    ref.where('name', '>=', term)
+    .where('name', '<=', term + '\uf8ff')
+    .limit(3))
+
+    return this.itemsCollection.valueChanges({ idField: 'customID' });
+  }
+
+
 
 
 
